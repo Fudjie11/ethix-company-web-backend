@@ -62,8 +62,6 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "phantomjs": "^2.1.7",
-    "phantomjs-prebuilt": "^2.1.16",
     "reflect-metadata": "^0.1.13",
     "request-context": "^2.0.0",
     "rimraf": "^3.0.2",
