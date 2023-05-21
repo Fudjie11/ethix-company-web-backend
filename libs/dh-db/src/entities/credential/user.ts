@@ -79,9 +79,6 @@ export class User {
     @prop({})
     googleId: string;
 
-    @prop({})
-    facebookId: string;
-
     @prop({ type: Schema.Types.Boolean, default: true })
     isActive: boolean;
 

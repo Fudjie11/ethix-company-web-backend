@@ -48,8 +48,4 @@ export class UserCreate {
   @IsString()
   readonly googleId: string;
 
-  @ApiProperty()
-  @IsString()
-  readonly facebookId: string;
-
 }
