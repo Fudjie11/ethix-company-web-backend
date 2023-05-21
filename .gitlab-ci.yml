@@ -1,0 +1,43 @@
+# We have 2 stage Test and Deploy
+stages:
+  - deploy
+
+# Config cache
+cache:
+  paths:
+    - node_modules/
+
+
+# Deploy job
+deploy-dev:
+  image: ruby:latest
+  only:
+    - dev
+  stage: deploy
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$HEROKU_APP_STAGING --api-key=$HEROKU_API_KEY
+
+# Deploy job
+deploy-prod:
+  type: deploy
+  # Attach Deploy job to Deploy stage
+  stage: deploy
+  # Config to use our Runner with Executor Shell
+  tags:
+    - backend
+  script:
+    # Only copy changed files to project folder
+    - cp -r -u * $PROJECT_DIR
+    - cd $PROJECT_DIR
+    - node --max-old-space-size=256 `which npm` install
+    - node --max-old-space-size=768 `which npm` run-script build
+    # Restart NodeJS service
+    - forever list
+    # - forever stopall
+    - forever stop -c node dist/src/main.js || true
+    - NODE_ENV=production forever start -c node dist/src/main.js
+  only:
+    - prod

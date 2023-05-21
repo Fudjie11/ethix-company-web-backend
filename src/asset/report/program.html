@@ -1,0 +1,82 @@
+<html>
+
+<head>
+  <meta charset="utf8">
+  <title>Simple Example</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+
+  <style>
+    .page-break { page-break-after: always; }
+    html,
+    body {
+      font-size: 12px;
+      margin-left: 15px;
+      margin-right: 15px;
+      box-sizing: border-box;
+      display: block;
+    }
+
+    .page {
+      position: relative;
+
+    }
+
+    .header {
+      text-align: center;
+    }
+
+    table {
+      font-size: 12px;
+    }
+
+    @media print {
+      body {}
+
+      .page {
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="row header">
+      <div class="col s12">
+        <h5>Laporan Pemasukan Infaq dan Donasi</h5>
+        <p>{{ startDate }} - {{ endDate }}</p>
+        <p>Total Pendapatan : {{ totalAmount }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <table class="splitForPrint">
+        <thead>
+          <tr>
+            <th>Nama Program</th>
+            <th>Pendapatan</th>
+            <th>Total Terkumpul</th>
+            <th>Target</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#data}}
+            <tr>
+              <td style="width: 350px;">{{ name }}</td>
+              <td>{{ income }}</td>
+              <td>{{ currentAmount }}</td>
+              <td>{{ targetAmount }}</td>
+              <td>{{ status }}</td>
+            </tr>
+          {{/data}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>
