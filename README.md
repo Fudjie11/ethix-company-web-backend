@@ -11,32 +11,39 @@ Enjoy DUDE :)
 
 ## Installation
 
+1. CLone the repo 
+```bash
+git clone https://github.com/Fudjie11/ethix-company-web-backend.git
+```
+2. Install the NPM package
 ```bash
 $ npm install
 ```
 
 ## Running the app
 
+You can running the app with:
 ```bash
 # development
 $ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+or you can running the app with watch mode for debug some function:
+```bash
+# watch mode
+$ npm run start:dev
+```
+
+## Deployment
+You can build the app on your server  
+setup your environtment on file .env 
 
 ```bash
-# unit tests
-$ npm run test
+node_env = "your environtment"
 
-# e2e tests
-$ npm run test:e2e
+# install
+$ npm run install
 
-# test coverage
-$ npm run test:cov
+# build
+$ npm run build
 ```
