@@ -11,6 +11,14 @@ export class ArticleCategoryVM {
   name: string;
 }
 
+export class ArticleTagVM {
+  @ApiProperty()
+  _id: string;
+
+  @ApiProperty()
+  name: string;
+}
+
 export class ArticleVM {
   @ApiProperty()
   _id: string;
@@ -35,6 +43,15 @@ export class ArticleVM {
 
   @ApiProperty()
   fileUrls: string[];
+
+  @ApiProperty()
+  tags: ArticleTagVM[];
+
+  @ApiProperty()
+  createdAt: Date;
+  
+  @ApiProperty()
+  updatedAt: Date;
 }
 
 export class ArticleEntryVM {
@@ -63,6 +80,9 @@ export class ArticleEntryVM {
   articleCategoryId: string;
   
   @ApiProperty()
+  tagsId: string[];
+
+  @ApiProperty()
   fileUrls: string[];
 }
 
@@ -70,9 +90,16 @@ export class ArticleListPaginationVM extends MBaseListResponse<ArticleVM[]> {
   @ApiProperty()
   @IsOptional()
   articleCategoryId?: string;
+
+  @ApiProperty()
+  @IsOptional()
+  tagId?: string;
 }
 
 export class PayloadArticleVm extends MBaseListPayload {
-  @ApiProperty()
+  @ApiProperty(({ required: false }))
   articleCategoryId?: string;
+
+  @ApiProperty(({ required: false }))
+  tagId?: string;
 }

@@ -7,6 +7,7 @@ import { RequestContextMiddleware } from './shared/middlewares/request-context.m
 import * as bodyParser from 'body-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { join } from 'path';
+import { json, urlencoded } from 'express';
 async function bootstrap() {
   let app: INestApplication & NestExpressApplication;
   app = await NestFactory.create(AppModule);
@@ -17,15 +18,24 @@ async function bootstrap() {
 
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setViewEngine('hbs');
-  app.enableCors();
+  app.enableCors(
+    {
+      origin: [
+        'https://ethix-website-staging.vercel.app',
+        'https://ethix-admin-staging.vercel.app',
+        'http://localhost:8000',
+        'http://localhost:4000'
+      ],
+      credentials: true
+    }
+  );
   app.use(RequestContextMiddleware.rawExpressMiddleware);
-
-  app.use(bodyParser.json({ limit: '50mb' }));
-  app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+  app.use(json({ limit: '50mb' }));
+  app.use(urlencoded({ extended: true, limit: '50mb' }));
 
   const options = new DocumentBuilder()
     .setTitle('MAIN API')
-    .setDescription('Lazis DH Main API')
+    .setDescription('Ethix Main API')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
@@ -34,7 +44,6 @@ async function bootstrap() {
 
   const port = process.env.PORT || 3206;
   const server = await app.listen(port, () => {
-    // tslint:disable-next-line:no-console
   });
 
   console.log(`===== Server listening on port ${port} =====`);

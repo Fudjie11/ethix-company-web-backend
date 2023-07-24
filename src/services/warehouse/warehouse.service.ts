@@ -81,7 +81,7 @@ export class WarehouseService {
 
   public static async delete(warehouseId: Types.ObjectId) {
     try {
-      await RepositoryService.warehouse.updateAndReturnUpdatedDocument(warehouseId, { isActive: false });
+      await RepositoryService.warehouse.remove(warehouseId);
       return warehouseId;
     } catch (error) {
       throw new WarehouseError(error);

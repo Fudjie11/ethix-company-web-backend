@@ -30,6 +30,8 @@ import { WarehouseModule } from './services/warehouse/warehouse.module';
 import { PublicArticleCategoryController } from './controllers/public/article-category/public-article-category.controller';
 import { PublicLocationController } from './controllers/public/location/location.controller';
 import { PublicWarehouseController } from './controllers/public/warehouse/warehouse.controller';
+import { TagModule } from './services/tag/tag.module';
+import { AdminTagController } from './controllers/admin/tag/admin-tag.controller';
 @Module({
     imports: [
         UsersModule,
@@ -38,6 +40,7 @@ import { PublicWarehouseController } from './controllers/public/warehouse/wareho
         PermissionModule,
         ArticleModule,
         ArticleCategoryModule,
+        TagModule,
         LocationModule,
         WarehouseModule,
         PassportModule.register({
@@ -57,6 +60,7 @@ import { PublicWarehouseController } from './controllers/public/warehouse/wareho
         AppController,
         AdminArticleController,
         AdminArticleCategoryController,
+        AdminTagController,
         AdminLocationController,
         AdminFileController,
         PublicFileController,

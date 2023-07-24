@@ -11,11 +11,13 @@ export class InternalDevSeed extends MongooseSeed {
   private finalClient: Client;
 
   public async seed() {
-    if (EnvironmentService.get('SEED_DISABLE_INTERNAL_DEV', true) && EnvironmentService.NODE_ENV === 'production') {
-      // tslint:disable-next-line:no-console
-      console.log(`[DB SEED] Skipping ${this.constructor.name} due to an environment condition`);
-      return;
-    }
+
+    // UN COMMENT IF NEEDED
+    // if (EnvironmentService.get('SEED_DISABLE_INTERNAL_DEV', true) && EnvironmentService.NODE_ENV === 'production') {
+    //   // tslint:disable-next-line:no-console
+    //   console.log(`[DB SEED] Skipping ${this.constructor.name} due to an environment condition`);
+    //   return;
+    // }
 
     const userModelClass = RepositoryService.user.model;
     const role = await RepositoryService.role.findOne({ name: "admin" }).lean();

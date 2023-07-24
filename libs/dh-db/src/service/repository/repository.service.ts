@@ -1,6 +1,7 @@
 import { AppConfig } from '../../entities/app-config/app-config';
 import { Article } from '../../entities/article/article';
 import { ArticleCategory } from '../../entities/article/article-category';
+import { Tag } from '../../entities/article/tag';
 import { Client } from '../../entities/client/client';
 import { User } from '../../entities/credential/user';
 import { File } from '../../entities/file/file';
@@ -23,6 +24,7 @@ export class RepositoryService {
 
   public static article = new MongooseGenericRepositoryService(Article, DatabaseService.mongooseConnection);
   public static articleCategory = new MongooseGenericRepositoryService(ArticleCategory, DatabaseService.mongooseConnection);
+  public static tag = new MongooseGenericRepositoryService(Tag, DatabaseService.mongooseConnection);
  
   public static file = new MongooseGenericRepositoryService(File, DatabaseService.mongooseConnection);
   public static role = new MongooseGenericRepositoryService(Role, DatabaseService.mongooseConnection);

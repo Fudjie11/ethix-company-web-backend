@@ -54,9 +54,6 @@ export class User {
     @prop()
     imageId: Types.ObjectId;
 
-     @prop()
-    donorId: Types.ObjectId;
-
     @prop({
         ref: File.name,
         localField: 'imageId',
@@ -75,9 +72,6 @@ export class User {
         justOne: true,
     })
     role: Ref<Role>;
-
-    @prop({})
-    googleId: string;
 
     @prop({ type: Schema.Types.Boolean, default: true })
     isActive: boolean;

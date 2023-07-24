@@ -17,6 +17,9 @@ export class ArticleService {
     };
 
     if (filter.articleCategoryId) query.articleCategoryId = filter.articleCategoryId
+    if (filter.tagId) {
+      query.tagsId = { $in: [filter.tagId] } 
+    }
 
     if (params.keyword) query['title']= {$regex: params.keyword, $options: 'i'};
     if (!params.take) params.take = 10;
@@ -35,7 +38,7 @@ export class ArticleService {
     const data = await RepositoryService.article
       .find(query)
       .populate('articleCategory')
-      // .populate('mainImage')
+      .populate('tags')
       .sort({ [sort]: sortDir })
       .skip(params.skip)
       .limit(params.take)
@@ -64,10 +67,12 @@ export class ArticleService {
 
     if (params.articleCategoryId) {
       query['articleCategoryId'] = params.articleCategoryId;
-    } else {
-      query['articleCategoryId'] = { $exists: false };
     }
 
+    if (params.tagId) {
+      query['tagsId'] = { $in: [params.tagId] } 
+    }
+   
     if (params.keyword) {
       query['title']= {$regex: params.keyword, $options: 'i'};
     };
@@ -84,7 +89,7 @@ export class ArticleService {
     const data = await RepositoryService.article
       .find(query)
       .populate('articleCategory')
-      // .populate('mainImage')
+      .populate('tags')
       .sort({ createdAt: -1 })
       .skip(+params.skip)
       .limit(+params.take)
@@ -107,7 +112,7 @@ export class ArticleService {
 
     const data = await RepositoryService.article.findOne({route})
     .populate('articleCategory')
-    // .populate('mainImage')
+    .populate('tags')
     .lean();
 
     if (!data) {
@@ -125,7 +130,7 @@ export class ArticleService {
 
     const data = await RepositoryService.article.findByObjectId(id)
     .populate('articleCategory')
-    // .populate('mainImage')
+    .populate('tags')
     .lean();
 
     if (!data) {
@@ -161,7 +166,7 @@ export class ArticleService {
 
   public static async delete(articleId: Types.ObjectId) {
     try {
-      await RepositoryService.article.updateAndReturnUpdatedDocument(articleId, { isActive: false });
+      await RepositoryService.article.remove(articleId);
       return articleId;
     } catch (error) {
       throw new ArticleError(error);

@@ -12,22 +12,19 @@ const mongoUrl = process.env.MONGO_URL;
 if (mongoUrl) {
   config.connectionString = mongoUrl;
 } else {
-  const env: string = 'local';
+  const env: string = process.env.NODE_ENV;
   switch (env) {
     case 'test':
-      config.connectionString = 'mongodb://localhost:27017/ethixdb';
+      config.connectionString = 'mongodb://localhost:27017';
       break;
     case 'local':
-      config.connectionString = 'mongodb://localhost:27017/ethixdb';
+      config.connectionString = 'mongodb://localhost:27017';
       break;
-    case 'development':
-      config.connectionString = 'mongodb://localhost:27017/ethixdb';
-      break;
-    case 'uat':
-      config.connectionString = 'mongodb://localhost:27017/ethixdb'
+    case 'staging': 
+      config.connectionString = 'mongodb+srv://investproject:1vU4p7nqTqwHRQRj@cluster0.7uv8ddd.mongodb.net/?retryWrites=true&w=majority'
       break;
     case 'production':
-      config.connectionString = 'mongodb://localhost:27017/ethixdb'
+      config.connectionString = 'mongodb+srv://investproject:1vU4p7nqTqwHRQRj@cluster0.7uv8ddd.mongodb.net/?retryWrites=true&w=majority'
       break;
   }
 }

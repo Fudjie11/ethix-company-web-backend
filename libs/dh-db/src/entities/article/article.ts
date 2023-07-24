@@ -1,8 +1,7 @@
 import { modelOptions, prop, Ref } from '@typegoose/typegoose';
 import { Schema, Types } from 'mongoose';
-import { File } from '../file/file';
 import { ArticleCategory } from './article-category';
-import { User } from '../credential/user';
+import { Tag } from './tag';
 
 @modelOptions({
   schemaOptions: {
@@ -30,9 +29,9 @@ export class Article {
 
   @prop({ type: Types.ObjectId, index: true }) articleCategoryId: Types.ObjectId;
   @prop({ ref: ArticleCategory, localField: 'articleCategoryId', foreignField: '_id', justOne: true }) articleCategory: ArticleCategory;
+  
+  @prop({ type: Types.ObjectId, index: true }) tagsId: Types.ObjectId[];
+  @prop({ ref: Tag, localField: 'tagsId', foreignField: '_id', }) tags: Tag[];
 
   @prop({ type: Schema.Types.String, required: true }) fileUrls: string[]
-  // @prop({ type: Types.ObjectId }) mainImageId: string;
-  // @prop({ type: Types.ObjectId }) mainImageId: Types.ObjectId;
-  // @prop({ ref: File, localField: 'mainImageId', foreignField: '_id', justOne: true }) mainImage: Ref<File>;
 }

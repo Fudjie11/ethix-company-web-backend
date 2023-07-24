@@ -44,8 +44,4 @@ export class UserCreate {
   @IsEnum(Gender)
   readonly gender: Gender;
 
-  @ApiProperty()
-  @IsString()
-  readonly googleId: string;
-
 }

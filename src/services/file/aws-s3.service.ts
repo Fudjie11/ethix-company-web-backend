@@ -5,7 +5,7 @@ import axios from 'axios';
 import { AWS_S3 } from '../../constants/aws-s3.constant';
 
 export class AwsS3Service {
-    public static cloudBucketName: string = 'ruang-insan-berbagi';
+    public static cloudBucketName: string = 'cabson-bucket';
 
     public static uploadFileBuffer(
         fileBuffer: any,

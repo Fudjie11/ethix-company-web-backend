@@ -24,8 +24,9 @@ export class AdminArticleController {
     @Query('sort') sort: any,
     @Query('keyword') keyword: string,
     @Query('articleCategoryId') articleCategoryId: string,
+    @Query('tagId') tagId: string,
   ) {
-    return await ArticleService.findAll({ take, skip, keyword, sort }, { articleCategoryId });
+    return await ArticleService.findAll({ take, skip, keyword, sort }, { articleCategoryId, tagId });
   }
 
   @Get(':id')

@@ -3,6 +3,7 @@ import { Types } from 'mongoose';
 import { LocationEntryDto } from '../../models/location/location.dto';
 import { MBaseListPayload } from '../../models/base/base-list-payload';
 import { LocationError } from './location-error.service';
+import { BadRequestException } from '@nestjs/common';
 
 export class LocationService {
   public static async findAll(params: MBaseListPayload) {
@@ -52,8 +53,18 @@ export class LocationService {
   }
 
   public static async delete(locationId: Types.ObjectId) {
+    const query: any = {
+      isActive: true,
+      locationId: locationId,
+    };
+    const total = await RepositoryService.warehouse.model.countDocuments(query);
+
+    if (total > 0) {
+      throw new BadRequestException('Location already used!');
+    }
+    
     try {
-      await RepositoryService.location.updateAndReturnUpdatedDocument(locationId, { isActive: false });
+      await RepositoryService.location.remove(locationId);
       return locationId;
     } catch (error) {
       throw new LocationError(error);

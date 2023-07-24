@@ -1,5 +1,5 @@
 module.exports = {
-  type: "production",
+  type: "development",
     cloudStorage: {
         aws: {
           cloudAccessKeyId: 'AKIAIITQMZCZBRO3SSMA',
@@ -8,5 +8,5 @@ module.exports = {
           cloudBucket: 'ethix-admin-app-dev'
         }
     },
-    jwtPrivateKey: process.env.JWT_PRIVATE_KEY
+    jwtPrivateKey: 'jwtPrivateKey'
 };

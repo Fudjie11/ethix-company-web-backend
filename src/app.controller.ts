@@ -7,7 +7,7 @@ import { EnvironmentService } from './shared/service/config/environment.service'
 export class AppController {
   @Get()
   hello() {
-    return `Hello! ETHIX Backend ${EnvironmentService.NODE_ENV} is up with config ${ConfigService.get('type')}!`;
+    return `Hello! ETHIX Backend ${EnvironmentService.NODE_ENV} is up !`;
   }
 
   @Get('ping')

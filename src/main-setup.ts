@@ -29,7 +29,7 @@
 //   // setup swagger
 //   const options = new DocumentBuilder()
 //     .setTitle('MAIN API')
-//     .setDescription('Lazis DH Main API')
+//     .setDescription('Ethix Main API')
 //     .setVersion('1.0')
 //     .addBearerAuth()
 //     .build();

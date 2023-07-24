@@ -41,7 +41,7 @@ export class FileService {
     const url = process.env.APP_URL
 
     const key = `attachments/${moment(new Date()).format('Y/M/D')}/${createdFile._id}/${createdFile.fileName}`;
-    const bucketName = 'ruang-insan-berbagi';
+    const bucketName = 'cabson-bucket';
     await RepositoryService.file.update(createdFile._id, { fileUrl: `https://${bucketName}.s3.amazonaws.com/${key}`, fileKey: key });
     // await RepositoryService.file.update(createdFile._id, { fileUrl: `${url}/public/file/${imageOfflinePath}`, fileKey: key });
     const newFile = await RepositoryService.file.findByObjectId(createdFile._id);

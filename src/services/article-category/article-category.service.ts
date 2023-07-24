@@ -1,4 +1,5 @@
 import { RepositoryService } from 'libs/dh-db/src/service/repository/repository.service';
+import { BadRequestException } from '@nestjs/common';
 import { Types } from 'mongoose';
 import { ArticleCategoryEntryDto } from '../../models/article-category/article-category.dto';
 import { MBaseListPayload } from '../../models/base/base-list-payload';
@@ -52,8 +53,18 @@ export class ArticleCategoryService {
   }
 
   public static async delete(articleCategoryId: Types.ObjectId) {
+    const query: any = {
+      isActive: true,
+      articleCategoryId: articleCategoryId,
+    };
+    const total = await RepositoryService.article.model.countDocuments(query);
+
+    if (total > 0) {
+      throw new BadRequestException('Article category already used!');
+    }
+    
     try {
-      await RepositoryService.articleCategory.updateAndReturnUpdatedDocument(articleCategoryId, { isActive: false });
+      await RepositoryService.articleCategory.remove(articleCategoryId);
       return articleCategoryId;
     } catch (error) {
       throw new ArticleCategoryError(error);

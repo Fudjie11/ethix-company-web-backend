@@ -20,7 +20,7 @@ export class RolePermissionSeed extends MongooseSeed {
     _id: this.mongoose.mongo.ObjectId(),
     code: 'article.view',
     name: 'View Article',
-    permissionGroup: 'article',
+    permissionGroup: 'Article',
     description: 'Permission for Admin user to Read Article',
     isActive: true,
   }, {
@@ -68,6 +68,38 @@ export class RolePermissionSeed extends MongooseSeed {
     name: 'Delete Article Category',
     permissionGroup: 'Article Category',
     description: 'Permission for Admin user to Delete Article Category',
+    isActive: true,
+  },
+  //#endregion
+
+  //#region admin.tag
+  {
+    _id: this.mongoose.mongo.ObjectId(),
+    code: 'tag.create',
+    name: 'Create Tag',
+    permissionGroup: 'Tag',
+    description: 'Permission for Admin user to Create Tag',
+    isActive: true,
+  }, {
+    _id: this.mongoose.mongo.ObjectId(),
+    code: 'tag.view',
+    name: 'View Tag',
+    permissionGroup: 'Tag',
+    description: 'Permission for Admin user to View Tag',
+    isActive: true,
+  }, {
+    _id: this.mongoose.mongo.ObjectId(),
+    code: 'tag.update',
+    name: 'Update Tag',
+    permissionGroup: 'Tag',
+    description: 'Permission for Admin user to Update Tag',
+    isActive: true,
+  }, {
+    _id: this.mongoose.mongo.ObjectId(),
+    code: 'tag.delete',
+    name: 'Delete Tag',
+    permissionGroup: 'Tag',
+    description: 'Permission for Admin user to Delete Tag',
     isActive: true,
   },
   //#endregion
@@ -164,17 +196,6 @@ export class RolePermissionSeed extends MongooseSeed {
     name: 'Delete Role',
     permissionGroup: 'Role',
     description: 'Permission for Admin user to Delete Role',
-    isActive: true,
-  },
-  //#endregion
-
-  //#region permission
-  {
-    _id: this.mongoose.mongo.ObjectId(),
-    code: 'permission.view',
-    name: 'View Permission',
-    permissionGroup: 'Permission',
-    description: 'Permission for Admin user to View Permission',
     isActive: true,
   },
   //#endregion

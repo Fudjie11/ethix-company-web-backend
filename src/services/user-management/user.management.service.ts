@@ -9,7 +9,7 @@ import { UserListPaginationVM, UserVM } from '../../models/user/user';
 const ObjectId = require('mongoose').Types.ObjectId;
 import moment from 'moment';
 import { ConfigService } from '../../shared/service/config/config.service';
-import { isEmail } from 'src/utils/validator';
+import { isEmail } from '../../utils/validator';
 
 @Injectable()
 export class UserManagementService {
@@ -25,7 +25,6 @@ export class UserManagementService {
 
     const phoneExist = await RepositoryService.user.findOne({ phone: payload.phoneNumber }).lean();
     if (phoneExist) throw new BadRequestException('Nomor telepon telah terpakai');
-
 
     const user = new User();
     const generatePassword = user.setPassword(payload.password);
@@ -132,16 +131,11 @@ export class UserManagementService {
         if (emailExist) throw new BadRequestException('Email already exist');
       }
 
-      const user = new User();
-      const generatePassword = user.setPassword(payload.password);
-
       const data: Partial<User> = {
         username: payload.username,
         email: payload.email,
         name: payload.name,
         phoneNumber: payload.phoneNumber,
-        _password: generatePassword.password,
-        _passwordSalt: generatePassword.passwordSalt,
         roleId: roleId,
       };
 

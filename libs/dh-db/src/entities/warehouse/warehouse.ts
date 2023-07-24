@@ -20,7 +20,7 @@ import { Location } from '../location/location'
 })
 
 export class Warehouse {
-  @prop({ type: Schema.Types.String, required: true })
+  @prop({ type: Schema.Types.String, required: true, index: true })
   name: string;
 
   @prop({ type: Schema.Types.Boolean, default: true })
